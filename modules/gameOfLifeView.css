@@ -1,0 +1,32 @@
+
+table {
+	border-top: 1px solid #1000;
+	width: auto;
+	height: auto;
+}
+
+td {
+	width: 19px;
+	height: 19px;
+	border: 1px solid black;
+}
+
+.alive {
+	background-color: black;
+}
+
+.dead {
+	background-color: white;
+}
+
+.operation {
+	font-size: 150%;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+.presets {
+	font-size: 120%;
+	display: inline;
+	margin: 5px;
+}
