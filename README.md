@@ -1,4 +1,4 @@
-Murmur
+Game of Life
 =
 
 Murmur uses Django with a MySQL backend (you can replace with any other backend Django supports). For email, we use postfix along with the python lamson library.

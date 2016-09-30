@@ -1,6 +1,12 @@
-
-
-var GameOfLife_install = function(domContainer,games){
+/**
+  * Install a GameOfLifeWidget in the sepcified DOM container.
+  * A GameOfLifeWidget is a user interface for editing GameOfLife data.
+  *
+  * @param domContainer, a jQuery wrapper around a sinle empty div element to install the GameOfLifeWidget in
+  * @param {array<GameOfLife>} games, a list of GameOfLife, a GameOfLife object is to be used as a model for
+  *									  the data being displayed and edited by this GameOfLifeWidget
+  */
+var GameOfLifeWidget_install = function(domContainer,games){
 	var game = games[0];
 	var startButton = $("<button>",{text:"Start", class: "operation"});
 	var pauseButton = $("<button>",{text:"Pause", class: "operation"});
@@ -76,6 +82,8 @@ var GameOfLife_install = function(domContainer,games){
 		}
 	});
 
+	// Cutomization of the board should only happen when the customize button is clicked
+	// Once a cell is clicked and deemed alive, its state cannot be reversed during current customization
 	customize.click(function(){
 		window.clearInterval(started);
 		running = false;

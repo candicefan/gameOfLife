@@ -14,7 +14,7 @@ var GameOfLife = function(w,l) {
 
   /*
    * Subscribe to changes to this object.
-   * @param subscriber a function that is called whenever the GameOflife is changed
+   * @param subscriber, a function that is called whenever the GameOflife is changed
    */
   that.subscribe = function(subsriber) {
     subsribers.push(subsriber);
@@ -64,7 +64,8 @@ var GameOfLife = function(w,l) {
 
   /* 
    * Get a the state of the cell at (x,y)
-   * @param {int, int} (x,y), the location of the cell to be inspected 
+   * @param {int} x, the x location of the cell to be inspected
+   * @param {int} y, the y location of the cell to be inspected
    */
   that.getState = function(x,y) {
     return board[y][x];
@@ -72,7 +73,8 @@ var GameOfLife = function(w,l) {
 
   /* 
    * Update the cell's state
-   * @param {int, int} (x,y), the location of the cell to be changed
+   * @param {int} x, the x location of the cell to be changed
+   * @param {int} y, the y location of the cell to be changed
    * @param {boolean} state, the new state to be given to the cell
    */
   that.addCell = function(x,y,state){
@@ -133,7 +135,8 @@ var GameOfLife = function(w,l) {
    *                2. Any live cell with two or three live neighbors lives on to the next generation
    *                3. Any live cell with more than there live neighbors dies
    *                4. Any dead cell with exactly three live neighbours becomes a live cell
-   * @param {int, int} (x,y), the location of the cell to be changed
+   * @param {int} x, the x location of the cell to be changed
+   * @param {int} y, the y location of the cell to be changed
    */
   that.updateStates = function(x,y){
     var boardChanges = nextStatesUpdates();
@@ -151,8 +154,9 @@ var GameOfLife = function(w,l) {
   };
 
   /* 
-   * Add a block to the game board
-   * @param {int, int} (x,y), the location for top left cell in a block
+   * Add a Block to the game board
+   * @param {int} x, the x location of the top left cell in a Block
+   * @param {int} y, the y ocation of the top left cell in a Block
    */
   that.addBlock = function(x,y){
     that.addCell(x,y,true);
@@ -161,10 +165,10 @@ var GameOfLife = function(w,l) {
     that.addCell(x+1,y+1,true);
   };
 
-  // (x,y) leftmost cell
   /* 
-   * Add a block to the game board
-   * @param {int, int} (x,y), the location for top left cell in a block
+   * Add a Beehive to the game board
+   * @param {int} x, the x location of the leftmost cell in a Beehive
+   * @param {int} y, the y location of the leftmost cell in a Beehive
    */
   that.addBeehive = function(x,y){
     that.addCell(x,y,true);
@@ -175,7 +179,11 @@ var GameOfLife = function(w,l) {
     that.addCell(x+3,y,true);
   };
 
-  // (x,y) leftmost cell
+  /* 
+   * Add a Loaf to the game board
+   * @param {int} x, the x location of the leftmost cell in a Loaf
+   * @param {int} y, the y location of the leftmost cell in a Loaf
+   */
   that.addLoaf = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x+1,y-1,true);
@@ -186,7 +194,11 @@ var GameOfLife = function(w,l) {
     that.addCell(x+3,y+1,true);
   };
 
-  // (x,y) top left cell
+  /* 
+   * Add a Boat to the game board
+   * @param {int} x, the x location of the top left cell in a Boat
+   * @param {int} y, the y location of the top left cell in a Boat
+   */
   that.addBoat = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x,y+1,true);
@@ -195,14 +207,22 @@ var GameOfLife = function(w,l) {
     that.addCell(x+2,y+1,true);
   };
 
-  // (x,y) the middle cell of the 3-cell bar, add a vertical bar
+  /* 
+   * Add a Blinker to the game board
+   * @param {int} x, the x location of the middle cell of a vertical Blinker
+   * @param {int} y, the y location of the middle cell of a vertical Blinker
+   */
   that.addBlinker = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x,y-1,true);
     that.addCell(x,y+1,true);
   };
 
-  // (x,y) leftmost cell when the cells come together
+  /* 
+   * Add a Toad to the game board
+   * @param {int} x, the x location of the leftmost cell of a Toad when cells come together
+   * @param {int} y, the y location of the leftmost cell of a Toad when cells come together
+   */
   that.addToad = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x+1,y,true);
@@ -212,7 +232,11 @@ var GameOfLife = function(w,l) {
     that.addCell(x+3,y-1,true);
   };
 
-  // (x,y) leftmost cell when it's two squares
+  /* 
+   * Add a Beacon to the game board
+   * @param {int} x, the x location of the left momst cell of Beacon is two squares
+   * @param {int} y, the y location of the left momst cell of Beacon is two squares
+   */
   that.addBeacon = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x,y+1,true);
@@ -223,7 +247,12 @@ var GameOfLife = function(w,l) {
     that.addCell(x+3,y+2,true);
     that.addCell(x+3,y+3,true);
   };
-  // (x,y) top left cell in one permutation
+
+  /* 
+   * Add a Glider to the game board
+   * @param {int} x, the x location of the top left cell in some permutation of Glider
+   * @param {int} y, the y location of the top left cell in some permutation of Glider
+   */
   that.addGlider = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x,y+2,true);
@@ -232,7 +261,11 @@ var GameOfLife = function(w,l) {
     that.addCell(x+2,y+1,true);
   };
 
-  // (x,y) leftmost cell
+  /* 
+   * Add a R-Pentomino to the game board
+   * @param {int} x, the x location of the leftmost cell in some permutation of R-Pentomino
+   * @param {int} y, the y location of the leftmost cell in some permutation of R-Pentomino
+   */
   that.addRPentomino = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x+1,y-1,true);
@@ -242,6 +275,13 @@ var GameOfLife = function(w,l) {
   };
 
   // (x,y) top left corner of a n*n square
+
+  /* 
+   * Add a square of random alive cells to the game board
+   * @param {int} x, the x location of the top left cell in the square
+   * @param {int} y, the y location of the top left cell in the square
+   * @param {int} n, the side length of the square
+   */
   that.addRandomCells = function(x,y,n){
     from_to(x,x+n-1,function(i){
       from_to(y,y+n-1,function(j){

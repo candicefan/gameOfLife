@@ -37,5 +37,5 @@ $(function() {
 
 	games = [game_0,game_1,game_2,game_3,game_4,game_5];
 
-	GameOfLife_install($("#game"),games);
+	GameOfLifeWidget_install($("#game"),games);
 })
