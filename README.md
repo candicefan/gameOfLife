@@ -15,7 +15,7 @@ The Model is gameOfLife.js. The View-Controller is gameOflifeWidget.js. gameOfLi
 
 ###Functionals
 
-I made a from_to function in gameOfLife,js and used that throughout the process of making and updating the game board.
+I made a from_to function in gameOfLife.js and used that throughout the process of making and updating the game board.
 
 ###Interesting things?
 
