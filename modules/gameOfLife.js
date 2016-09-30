@@ -2,7 +2,8 @@
   * Create a GameOfLife object. 
   * A GameOfLife is a board of size width * length, with width * length number of cells
   * Each cell can be dead or alive, there are a set of rules that determine the next state of the cell
-  * @constructor {int} w 
+  * @param {int} w, the width of the game board
+  * @param {int} l, the length of the game board
   */
 var GameOfLife = function(w,l) {
   var that = Object.create(GameOfLife.prototype);
@@ -11,6 +12,10 @@ var GameOfLife = function(w,l) {
   var length = l;
   var subsribers = [];
 
+  /*
+   * Subscribe to changes to this object.
+   * @param subscriber a function that is called whenever the GameOflife is changed
+   */
   that.subscribe = function(subsriber) {
     subsribers.push(subsriber);
   }
@@ -44,6 +49,9 @@ var GameOfLife = function(w,l) {
 
   var board = makeBoard(width,length);
 
+  /* 
+   * Get a representation of the current board status
+   */
   that.currentBoard = function() {
     boardCopy = makeBoard(width,length);
     from_to(0,length-1,function(j){
@@ -54,15 +62,27 @@ var GameOfLife = function(w,l) {
     return boardCopy;
   };
 
+  /* 
+   * Get a the state of the cell at (x,y)
+   * @param {int, int} (x,y), the location of the cell to be inspected 
+   */
   that.getState = function(x,y) {
     return board[y][x];
   };
 
+  /* 
+   * Update the cell's state
+   * @param {int, int} (x,y), the location of the cell to be changed
+   * @param {boolean} state, the new state to be given to the cell
+   */
   that.addCell = function(x,y,state){
     board[y][x] = state;
     publishChanges();
   };
 
+  /* 
+   * Reset the game board to an empty board (all dead)
+   */
   that.reset = function(){
     board = makeBoard(width,length);
     publishChanges();
@@ -107,6 +127,14 @@ var GameOfLife = function(w,l) {
     return boardChanges;
   };
 
+  /* 
+   * Update the states of all cells in the board to its next generation.
+   * Updating rule: 1. Any live cell with fewer than two live neighbors dies
+   *                2. Any live cell with two or three live neighbors lives on to the next generation
+   *                3. Any live cell with more than there live neighbors dies
+   *                4. Any dead cell with exactly three live neighbours becomes a live cell
+   * @param {int, int} (x,y), the location of the cell to be changed
+   */
   that.updateStates = function(x,y){
     var boardChanges = nextStatesUpdates();
     var newBoard = makeBoard(width,length);
@@ -122,7 +150,10 @@ var GameOfLife = function(w,l) {
     publishChanges();
   };
 
-  // (x,y) top left cell
+  /* 
+   * Add a block to the game board
+   * @param {int, int} (x,y), the location for top left cell in a block
+   */
   that.addBlock = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x+1,y,true);
@@ -131,6 +162,10 @@ var GameOfLife = function(w,l) {
   };
 
   // (x,y) leftmost cell
+  /* 
+   * Add a block to the game board
+   * @param {int, int} (x,y), the location for top left cell in a block
+   */
   that.addBeehive = function(x,y){
     that.addCell(x,y,true);
     that.addCell(x+1,y-1,true);
