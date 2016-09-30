@@ -1,9 +1,9 @@
 Game of Life
 =
 
-Murmur uses Django with a MySQL backend (you can replace with any other backend Django supports). For email, we use postfix along with the python lamson library.
+This is a browser-based version of John Conway's Game of Life, a cellular automaton that simulates the evolution of an organism using a simple deterministic rule.
 
-### Installation Instructions
+### What concerns you identified and how you separated them?
 
 #### install required linux packages
 `sudo apt-get install libmysqlclient-dev python-dev`
@@ -14,7 +14,7 @@ Murmur uses Django with a MySQL backend (you can replace with any other backend 
 #### download murmur
 `git clone https://github.com/haystack/murmur.git`
 
-#### configuration
+#### What the program modules are
 * configure your relay_server (postfix or something else) in config/settings.py
 * use port other than 25 (default is currently set at 587)
 * edit database details in a new file called private.py. http_handler/settings.py looks for this file to populate database information
