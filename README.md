@@ -20,3 +20,4 @@ I made a from_to function in gameOfLife.js and used that throughout the process 
 ###Interesting things?
 
 I could add more functions, such as enabling clicks on the board at any time. But I spent more time on the other parts, I wish I could have done that. I also stop any program that's running when anything is clicked, but the way I did it was somewhat stupid, wish I could've improve that.
+# gameOfLife
